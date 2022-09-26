@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-top-artists',
@@ -7,10 +7,12 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./top-artists.component.css'],
 })
 export class TopArtistsComponent implements OnInit {
+  signUpForm = {} as FormGroup;
+  loginForm = {} as FormGroup;
   signSubmit = false;
   submitted = false;
-  hide = true;
-  signHide = true;
+  hide = false;
+  signHide = false;
   role = [
     { id: 1, name: 'Manager' },
     { id: 2, name: 'Hr' },
@@ -20,39 +22,46 @@ export class TopArtistsComponent implements OnInit {
   ];
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createLoginForm();
+    this.createSignUpForm();
+  }
 
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
+  createLoginForm() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
 
-  signUpForm = this.fb.group(
-    {
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
-      date: ['', Validators.required],
-      role: [, Validators.required],
-      passWord: ['', [Validators.required, Validators.minLength(6)]],
-      ConfirmPass: ['', [Validators.required, Validators.minLength(6)]],
-    },
-    {
-      validators: () => {
-        if (
-          this.signUpForm?.controls?.passWord.value !=
-          this.signUpForm?.controls?.ConfirmPass.value
-        ) {
-          console.log('hello');
-          this.signUpForm.controls.ConfirmPass.setErrors({
-            passMisMatch: true,
-          });
-        }
-        console.log('hello');
+  createSignUpForm() {
+    this.signUpForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        age: ['', Validators.required],
+        gender: ['', Validators.required],
+        date: ['', Validators.required],
+        role: [, Validators.required],
+        passWord: ['', [Validators.required, Validators.minLength(6)]],
+        ConfirmPass: ['', [Validators.required, Validators.minLength(6)]],
       },
-    }
-  );
+      {
+        validators: () => {
+          if (
+            this.signUpForm?.controls?.passWord.value !=
+            this.signUpForm?.controls?.ConfirmPass.value
+          ) {
+            console.log('hello');
+            this.signUpForm.controls.ConfirmPass.setErrors({
+              passMisMatch: true,
+            });
+          }
+          console.log('hello');
+        },
+      }
+    );
+  }
 
   get allControls() {
     return this.loginForm.controls;
@@ -60,7 +69,8 @@ export class TopArtistsComponent implements OnInit {
 
   onSubmit(data: any) {
     this.submitted = true;
-    console.log({ data });
+    console.log('login');
+    console.log(data?.controls.email.value);
   }
 
   get signControls() {
