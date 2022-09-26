@@ -1,3 +1,21 @@
-<p>
-history works!
-</p>
+<div class="narrowCard">
+  <mat-card>
+    <mat-card-content *ngIf="displayList">
+      <h2 class="example-h2">Today's list:</h2>
+      <mat-list role="list">
+        <mat-divider *ngIf="toDoList.length"></mat-divider>
+        <div
+          *ngFor="let item of toDoList"
+          [class.selected]="item === selectedItem"
+          (click)="onSelect(item)"
+        >
+          <mat-list-item role="listitem">
+          {{ item.description }}
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
