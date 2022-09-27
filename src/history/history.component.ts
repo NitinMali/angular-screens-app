@@ -15,6 +15,7 @@ export class HistoryComponent implements OnInit {
 
   onSelect(item: any): void {
     this.selectedItem = item;
+    console.log(item);
   }
 
   onDone($event: any) {
