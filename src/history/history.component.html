@@ -1,21 +1,56 @@
-<div class="narrowCard">
-  <mat-card>
-    <mat-card-content *ngIf="displayList">
-      <h2 class="example-h2">Today's list:</h2>
-      <mat-list role="list">
-        <mat-divider *ngIf="toDoList.length"></mat-divider>
-        <div
-          *ngFor="let item of toDoList"
-          [class.selected]="item === selectedItem"
-          (click)="onSelect(item)"
-        >
-          <mat-list-item role="listitem">
-          {{ item.description }}
-          </mat-list-item>
+<div>
+  <!-- <mat-toolbar>
+    <span>My Application</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar> -->
 
-          <mat-divider></mat-divider>
-        </div>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <mat-grid-list cols="4" rowHeight="1.5em" style="margin-top:0.5em">
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <div class="text-inside-grid"><h5>Application</h5></div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button
+        mat-icon-button
+        style="padding-left:1em"
+        class="example-icon"
+        aria-label="Example icon-button with share icon"
+      >
+        <mat-icon>share</mat-icon>
+      </button></mat-grid-tile
+    >
+  </mat-grid-list>
+
+  <mat-list role="list">
+    <mat-divider *ngIf="toDoList.length"></mat-divider>
+    <div
+      *ngFor="let item of toDoList"
+      [class.selected]="item === selectedItem"
+      (click)="onSelect(item)"
+    >
+      <mat-list-item role="listitem">
+        <h5 matLine>{{ item.description }}</h5>
+        <p matLine>mall text</p>
+      </mat-list-item>
+      <div style="padding-left:1em; padding-right:1em; padding-bottom:1em">
+        <mat-grid-list cols="4" rowHeight="1em">
+          <mat-grid-tile
+            *ngFor="let tile of tiles"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows"
+            [style.background]="tile.color"
+          >
+            {{ tile.text }}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
 </div>

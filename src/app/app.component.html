@@ -19,13 +19,13 @@
       <span class="example-spacer"></span>
       <span class="center">My App</span>
       <span class="example-spacer"></span>
-      <button
+      <!-- <button
         mat-icon-button
         class="example-icon favorite-icon"
         aria-label="Example icon-button with heart icon"
       >
         <mat-icon>favorite</mat-icon>
-      </button>
+      </button> -->
       <button
         mat-icon-button
         class="example-icon"
@@ -56,6 +56,14 @@
             >favorite_border
           </mat-icon>
           <span>Top Tracks</span>
+        </button>
+        <button
+          mat-flat-button
+          routerLink="/history"
+          routerLinkActive="active-link"
+        >
+          <mat-icon class="material-icons color_blue">history</mat-icon>
+          <span>History</span>
         </button>
         <button
           mat-flat-button
